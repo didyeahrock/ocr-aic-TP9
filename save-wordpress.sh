@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo ""$(date +"%d-%m-%y")"Lancement par cron du script save-wordpress.sh" >> /var/log/cron.log
 # variables
 ftpsite="srvftp"
 ftpuser="didier"
@@ -7,7 +7,7 @@ ftppass="pass"
 ftpdir="/backups/"
 wppath="/var/www/"
 wpfolder="domain.com"
-retime="5"
+retime="4"
 
 # supprimer les vieilles sauvegarde de plus de 5 jours
 find $ftpdir* -type d -mtime +$retime -exec rm -rdf {} \;

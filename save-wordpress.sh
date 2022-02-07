@@ -7,6 +7,7 @@ ftppass="pass"
 ftpdir="/backups/"
 wppath="/var/www/"
 wpfolder="domain.com"
+a2path="/etc/apache2/sites-available/"
 retime="4"
 
 # supprimer les vieilles sauvegarde de plus de 5 jours
@@ -21,6 +22,8 @@ else
   mkdir -v $ftpdir"wordpress-$(date +"%d-%m-%Y")"
   # creation  du dossier recevant les dump de la base mysql dans l'arborescence du site Wordpress
   mkdir -v $wppath$wpfolder$ftpdir"wordpress-$(date +"%d-%m-%Y")"
+  # copie du fichier vhost apache
+  cp $a2path$wpfolder.conf $wppath$wpfolder$ftpdir
   # Dump de la base Wordpress 
   mysqldump -u root -pS@ral0me --databases wordpress --skip-dump-date --ignore-table=mysql.event --single-transaction --quick --add-drop-table > $wppath$wpfolder$ftpdir"wordpress-$(date +"%d-%m-%Y")"/save-wordpress-sql.dump
   # Tar compressé de l'arborescence du site Wordpress qui contient aussi le Dump SQL
